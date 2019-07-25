@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hermes.Core.Interface
+namespace Hermes.Core.Interfaces
 {
     public interface IMessageWriter
     {
