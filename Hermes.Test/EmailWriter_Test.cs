@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Tests
 {
-    public class Tests
+    public class EmailWriter_Test
     {
         [SetUp]
         public void Setup()

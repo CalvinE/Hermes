@@ -1,4 +1,5 @@
-﻿using Hermes.Core.Interfaces;
+﻿using Hermes.Core.Enums;
+using Hermes.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,22 +9,24 @@ namespace Hermes.Core.Options
     /// <summary>
     /// 
     /// </summary>
-    public class EmailWriterOptions : IOptions
+    public class EmailWriterOptions : IOptions, IMessageWriterOptions
     {
         public string SMTPHost { get; set; }
         public string SMTPUserName { get; set; }
         public string SMTPPassword { get; set; }
         public int SMTPPort { get; set; }
         public bool UseSSL { get; set; }
-        public List<string> Recipients { get; set; }
+        public string ToAddress { get; set; }
+        public string FromAddress { get; set; }
         public string Subject { get; set; }
-        public string Body { get; set; }
         public bool IsHTML { get; set; }
-        public Dictionary<string, string> Placeholders;
+        public Dictionary<string, string> Placeholders { get; set; }
+        public MessageSystemType MessageType { get => MessageSystemType.Email; }
+        public string Body { get; set; }
+        public string MessageIdentifier { get; set; }
 
         public EmailWriterOptions()
         {
-            Recipients = new List<string>();
             Placeholders = new Dictionary<string, string>();
         }
 
@@ -49,7 +52,11 @@ namespace Hermes.Core.Options
             {
                 return false;
             }
-            else if (Recipients.Count < 1)
+            else if (string.IsNullOrEmpty(ToAddress))
+            {
+                return false;
+            }
+            else if (string.IsNullOrEmpty(FromAddress))
             {
                 return false;
             }
