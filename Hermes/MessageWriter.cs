@@ -50,6 +50,12 @@ namespace Hermes.Core
                     logger.LogDebug($"About to attempt sending a message. type = {options.MessageType} : id = {options.MessageIdentifier}");
                     Result = await PerformSend(options, logger);
                     logger.LogDebug($"Finished sending, success = {Result.MessageSent}");
+                    Result = new WriterResult()
+                    {
+                        MessageIdentifier = options.MessageIdentifier,
+                        MessageSent = true,
+                        ReasonFailed = null
+                    };
                 }
                 catch (Exception ex)
                 {

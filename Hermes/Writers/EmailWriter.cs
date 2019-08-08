@@ -29,13 +29,13 @@ namespace Hermes.Core.Writers
 
             using (var smtpClient = new SmtpClient(castOptions.SMTPHost, castOptions.SMTPPort))
             {
-                MailMessage message = new MailMessage(castOptions.FromAddress, castOptions.ToAddress, castOptions.Subject, castOptions.Body);
-                message.IsBodyHtml = castOptions.IsHTML;
-                message.Headers.Add("messageidentifier", castOptions.MessageIdentifier);
                 smtpClient.EnableSsl = castOptions.UseSSL;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Credentials = new System.Net.NetworkCredential(castOptions.SMTPUserName, castOptions.SMTPPassword);
+                MailMessage message = new MailMessage(castOptions.FromAddress, castOptions.ToAddress, castOptions.Subject, castOptions.Body);
+                message.IsBodyHtml = castOptions.IsHTML;
+                message.Headers.Add("messageidentifier", castOptions.MessageIdentifier);
                 await smtpClient.SendMailAsync(message);
             }
 
