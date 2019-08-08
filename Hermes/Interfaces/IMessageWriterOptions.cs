@@ -9,5 +9,6 @@ namespace Hermes.Core.Interfaces
     {
         MessageSystemType MessageType { get; }
         string MessageIdentifier { get; set; }
+        string ToString();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Hermes.Core.Enums;
 using Hermes.Core.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -62,6 +63,14 @@ namespace Hermes.Core.Options
             }
 
             return true;
+        }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, new JsonSerializerSettings()
+            {
+                ContractResolver = DeserializationStrategy.DefaultContractResolver
+            });
         }
     }
 }

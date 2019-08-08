@@ -33,6 +33,8 @@ namespace Hermes.Core.Writers
                 message.IsBodyHtml = castOptions.IsHTML;
                 message.Headers.Add("messageidentifier", castOptions.MessageIdentifier);
                 smtpClient.EnableSsl = castOptions.UseSSL;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Credentials = new System.Net.NetworkCredential(castOptions.SMTPUserName, castOptions.SMTPPassword);
                 await smtpClient.SendMailAsync(message);
             }
